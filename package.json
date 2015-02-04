@@ -1,0 +1,19 @@
+{
+    "name": "volunteer-management-app",
+    "version": "0.0.1",
+    "description": "volunteer management for events",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ideanerd/volunteer-management-app.git"
+    },
+    "private": true,
+    "devDependencies": {
+        "bower": "^1.3.1",
+        "http-server": "^0.6.1"
+    },
+    "scripts": {
+        "postinstall": "bower install",
+        "prestart": "npm install",
+        "start": "http-server -a 0.0.0.0 -p 8000"
+    }
+}
