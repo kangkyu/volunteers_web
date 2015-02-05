@@ -1,7 +1,7 @@
-<h1>Event Index</h1>
+<div class="page-header"><h1>Events Page</h1></div>
 
 <div ng-controller="eventIndexCtrl">
-    <ul ng-repeat="event in events">
+    <ul ng-repeat="event in events" class="list-unstyled well-lg">
         <li>title - {{event.title}}</li>
         <li>address - {{event.address}}</li>
         <li>date - {{event.date}}</li>
