@@ -6,6 +6,7 @@ angular
     'userServiceModule',
     'eventIndexCtrlModule',
     'eventServiceModule',
+    'eventShowCtrlModule',
 
     'mainCtrlModule'
 ])
@@ -25,6 +26,10 @@ angular
     .when('/events', {
         templateUrl: 'app/components/events/event-index.html',
         controller: 'eventIndexCtrl'
+    })
+    .when('/events/:eventId', {
+        templateUrl: 'app/components/events/event-show.html',
+        controller: 'eventShowCtrl'
     })
     .otherwise({
         redirectTo: '/'
