@@ -1,7 +1,7 @@
-<div class="page-header"><h1>Users Page</h1></div>
-
 <div ng-controller="userIndexCtrl">
-    <ul ng-repeat="user in users" class="list-unstyled well-lg">
+<div class="page-header"><h1>{{users.length}} User(s)</h1></div>
+
+   <ul ng-repeat="user in users" class="list-unstyled well-lg">
         <li>first name - {{user.firstName}}</li>
         <li>last name - {{user.lastName}}</li>
         <li>email - {{user.email}}</li>
