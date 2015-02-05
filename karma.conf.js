@@ -2,8 +2,8 @@
 // Generated on Thu Feb 05 2015 00:04:29 GMT-0800 (PST)
 var ANGULAR = 'bower_components/angular/angular.js';
 var ANGULAR_MOCKS = 'bower_components/angular-mocks/angular-mocks.js';
-var SOURCE_JS = 'app/scripts/app-module.js';
-var SOURCE_JS_SUB = 'app/scripts/**/*.js';
+var SOURCE_JS = 'app/app-module.js';
+var SOURCE_JS_SUB = 'app/components/**/*.js';
 var UNIT_TEST = 'test/unit/**/*_test.js'
 
 module.exports = function(config) {

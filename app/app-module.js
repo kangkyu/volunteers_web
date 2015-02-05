@@ -12,18 +12,18 @@ angular
 .config(function ($routeProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'app/views/main.html',
+        templateUrl: 'app/components/main/main.html',
         controller: 'mainCtrl'
     })
     .when('/about', {
-        templateUrl: 'app/views/about.html'
+        templateUrl: 'app/components/about/about.html'
     })
     .when('/users', {
-        templateUrl: 'app/views/user-index.html',
+        templateUrl: 'app/components/users/user-index.html',
         controller: 'userIndexCtrl'
     })
     .when('/events', {
-        templateUrl: 'app/views/event-index.html',
+        templateUrl: 'app/components/events/event-index.html',
         controller: 'eventIndexCtrl'
     })
     .otherwise({

@@ -3,5 +3,6 @@ angular
 .controller('eventIndexCtrl', 
 ['$scope', 'eventService',
 function($scope, eventService){
+
     $scope.events = eventService.getAll();
 }]);
