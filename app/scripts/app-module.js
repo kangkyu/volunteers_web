@@ -4,6 +4,8 @@ angular
     'ngRoute',
     'userIndexCtrlModule',
     'userServiceModule',
+    'eventIndexCtrlModule',
+    'eventServiceModule',
 
     'mainCtrlModule'
 ])
@@ -19,6 +21,10 @@ angular
     .when('/users', {
         templateUrl: 'app/views/user-index.html',
         controller: 'userIndexCtrl'
+    })
+    .when('/events', {
+        templateUrl: 'app/views/event-index.html',
+        controller: 'eventIndexCtrl'
     })
     .otherwise({
         redirectTo: '/'
