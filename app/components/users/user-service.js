@@ -1,6 +1,6 @@
 angular
 .module('userServiceModule', [])
-.factory('userService', function(){
+.factory('userService', ['$http', function($http){
     userService = {};
     users = [
         {
@@ -29,6 +29,12 @@ angular
         }
     ];
 
+    userService.loadAll = function(){
+        return $http.get('/api/users').success(function(data){
+            users = data;
+        });
+    };
+
     userService.getAll = function(){
         return users;
     };
@@ -46,4 +52,4 @@ angular
     };
 
     return userService;
-});
+}]);

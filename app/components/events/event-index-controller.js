@@ -1,8 +1,9 @@
 angular
 .module('eventIndexCtrlModule', [])
-.controller('eventIndexCtrl', 
-['$scope', 'eventService',
+.controller('eventIndexCtrl', ['$scope', 'eventService',
 function($scope, eventService){
 
-    $scope.events = eventService.getAll();
+    eventService.loadAll().then(function(){
+        $scope.events = eventService.getAll();
+    });
 }]);

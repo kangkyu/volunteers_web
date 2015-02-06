@@ -1,7 +1,6 @@
 'use strict';
 
-describe('eventIndexCtrl', function(){
-
+describe('eventShowModule', function(){
     var mockEvents = [
         {
             _id: "1",
@@ -33,28 +32,40 @@ describe('eventIndexCtrl', function(){
         }
     ];
 
-    var $scope, $rootScope, eventIndexCtrl, $controller, eventService;
+    var mockEventId = "2";
+    var resultEvent = {
+        _id: "2",
+        title: "Super Bowl",
+        address: "Phoenix, Arizona",
+        date: "Feb 1, 2015",
+        time: "2am"
+    };
+
+    var $scope, $rootScope, $routeParams, $controller, eventShowCtrl, eventService;
     beforeEach(function(){
-        module("eventIndexCtrlModule");
+        module("eventShowCtrlModule");
         module("eventServiceModule");
 
         inject(function($injector){
-            $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
+            $routeParams = { 'eventId': mockEventId };
+            $controller = $injector.get('$controller');
             eventService = $injector.get('eventService');
         });
 
-        eventIndexCtrl = $controller('eventIndexCtrl',{
+        eventShowCtrl = $controller('eventShowCtrl', {
             $scope: $scope,
+            $routeParams: $routeParams,
             eventService: eventService
         });
     });
 
-    it("has $scope.events of all events", function(){
-        eventService.setAll(mockEvents);
-        $scope.events = eventService.getAll();
+    it('find a event object with event id on url', function(){
 
-        expect($scope.events).toEqual(mockEvents);
+        eventService.setAll(mockEvents);
+        $scope.event = eventService.getById($routeParams.eventId);
+
+        expect($scope.event).toEqual(resultEvent);
     });
 });

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 describe('eventService', function(){
 
@@ -39,7 +39,7 @@ describe('eventService', function(){
             address: "Rio De Janeiro, Brazil",
             date: "Jun 12, 2014",
             time: "2pm"
-        };
+    };
 
     var eventService;
     beforeEach(function(){
@@ -48,34 +48,30 @@ describe('eventService', function(){
         inject(function($injector){
             eventService = $injector.get('eventService');
         });
+
+        eventService.setAll(mockEvents);
     });
 
     describe('getAll', function(){
-        beforeEach(function(){
-            eventService.setAll(mockEvents);
-        });
-
-        it("gets all events", function(){
-            expect(eventService.getAll()).toEqual(mockEvents);
-        });
-    });
-
-    describe('setAll', function(){
-        it("sets all events", function(){
-            eventService.setAll(mockEvents);
+        it("should get all events", function(){
             expect(eventService.getAll()).toEqual(mockEvents);
         });
     });
 
     describe('getById', function(){
-        it("gets an event by its id when there's a match", function(){
-            eventService.setAll(mockEvents);
+        it("should get an event when id matches", function(){
             expect(eventService.getById(idPicked)).toEqual(eventPicked);
         });
 
-        it("gets empty object when there's no match by id", function(){
-            eventService.setAll(mockEvents);
+        it("should get an empty object when there's no match by id", function(){
             expect(eventService.getById("nomatch")).toEqual({});
+        });
+    });
+
+    describe('setAll', function(){
+        it('should set an array with input users', function(){
+            eventService.setAll(mockEvents);
+            expect(eventService.getAll()).toEqual(mockEvents);
         });
     });
 });
