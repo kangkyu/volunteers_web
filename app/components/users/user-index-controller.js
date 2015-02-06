@@ -1,8 +1,10 @@
 angular
 .module('userIndexCtrlModule', [])
-.controller('userIndexCtrl', 
-['$scope', 'userService', 
+.controller('userIndexCtrl', ['$scope', 'userService',
 function($scope, userService){
 
-    $scope.users = userService.getAll();
+    userService.loadAll().then(function(){
+      $scope.users = userService.getAll();  
+    });
+    
 }]);

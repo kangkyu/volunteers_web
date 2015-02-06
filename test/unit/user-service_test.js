@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 describe('userService', function(){
 
@@ -43,18 +43,20 @@ describe('userService', function(){
         inject(function($injector){
             userService = $injector.get('userService');
         });
-
-        userService.setAll(mockUsers); 
     });
 
     describe('getAll', function(){
 
         it('should get all users', function(){
+            userService.setAll(mockUsers);
             expect(userService.getAll()).toEqual(mockUsers);
         });
     });
 
     describe('getById', function(){
+        beforeEach(function(){
+            userService.setAll(mockUsers);
+        });
 
         it("should get a user if id matching", function(){
             expect(userService.getById(idPicked)).toEqual(userPicked);
@@ -62,6 +64,14 @@ describe('userService', function(){
 
         it("should get an empty object if id not matching", function(){
             expect(userService.getById("nomatch")).toEqual({});
+        });
+    });
+
+    describe('setAll', function(){
+
+        it('should set users array with data input', function(){
+            userService.setAll(mockUsers);
+            expect(userService.getAll()).toEqual(mockUsers);
         });
     });
 });

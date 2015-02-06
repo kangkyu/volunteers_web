@@ -47,8 +47,9 @@ describe('userIndexCtrl', function(){
         });
     });
 
-    it('has an array of all users under its scope', function(){
+    it('should have an array of all users', function(){
         userService.setAll(mockUsers);
-        expect($scope.users).toEqual(mockUsers);
+
+        expect(userService.getAll()).toEqual(mockUsers);
     });
 });

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 describe('eventIndexCtrl', function(){
 
@@ -53,6 +53,8 @@ describe('eventIndexCtrl', function(){
 
     it("has $scope.events of all events", function(){
         eventService.setAll(mockEvents);
+        $scope.events = eventService.getAll();
+
         expect($scope.events).toEqual(mockEvents);
     });
 });
