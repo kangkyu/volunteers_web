@@ -27,7 +27,16 @@ var users = [
         "email": "napoleon@example.com"
     }
 ];
+var uuid = 4;
 
+function getId() {
+    return uuid++;
+}
+
+function addUser(user) {
+    user._id = getId();
+    users.push(user);
+}
 
 /* /api/users. */
 router.route('/')
@@ -35,13 +44,14 @@ router.route('/')
         res.json(users);
     })
     .post(function (req, res, next) {
-        res.send('Not Implemented');
+        addUser(req.body);
+        res.send(users[users.length - 1]);
     });
 
 /* /api/users/id. */
 router.param(':id', function (req, res, next, id) {
     req.data = users.filter(function (user) {
-        return user._id === id;
+        return user._id == id;
     })[0] || {};
     next();
 });
