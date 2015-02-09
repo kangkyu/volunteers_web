@@ -1,33 +1,9 @@
 angular
 .module('userServiceModule', [])
-.factory('userService', ['$http', function($http){
+.factory('userService', ['$http',
+function($http){
     userService = {};
-    users = [
-        {
-            "_id": "1",
-            "firstName": "Randy",
-            "lastName": "Johnson",
-            "email": "randy@example.com"
-        },
-        {
-            "_id": "2",
-            "firstName": "Ty",
-            "lastName": "Cobb",
-            "email": "ty@example.com"
-        },
-        {
-            "_id": "3",
-            "firstName": "Christy",
-            "lastName": "Mathewson",
-            "email": "christopher@example.com"
-        },
-        {
-            "_id": "4",
-            "firstName": "Nap",
-            "lastName": "Lajoie",
-            "email": "napoleon@example.com"
-        }
-    ];
+    users = [];
 
     userService.loadAll = function(){
         return $http.get('/api/users').success(function(data){
@@ -43,8 +19,7 @@ angular
         var match = users.filter(function(user){
             return user._id === id;
         });
-        match.push({});
-        return match.shift();
+        return match.pop() || {};
     };
 
     userService.setAll = function(data){

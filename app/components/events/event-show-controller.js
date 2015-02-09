@@ -4,7 +4,7 @@ angular
 function($scope, $routeParams, eventService){
 
     eventService.loadAll().then(function(){
-        $scope.events = eventService.getAll();
+        // $scope.events = eventService.getAll();
         $scope.event = eventService.getById($routeParams.eventId);
     });
 }]);
