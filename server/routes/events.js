@@ -70,7 +70,19 @@ router.route('/:id')
         res.json(req.data);
     })
     .put(function (req, res, next) {
-        res.send('Not Implemented');
+        var deletedEvent = {};
+
+        var index = _.findIndex(events, function (event) {
+            return event._id == req.data._id;
+        });
+
+        if (index !== -1) {
+            deletedEvent = events.splice(index, 1)[0];
+            events.push(req.body);
+        }
+
+        res.json(req.body);
+
     })
     .delete(function (req, res, next) {
         var deleteEvent = {};
