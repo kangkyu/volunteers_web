@@ -61,7 +61,7 @@ describe('eventShowModule', function(){
         });
     });
 
-    it('find a event object with event id on url', function(){
+    it('should find a event object with event id on url', function(){
 
         eventService.setAll(mockEvents);
         $scope.event = eventService.getById($routeParams.eventId);

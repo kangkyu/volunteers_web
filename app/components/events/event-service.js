@@ -19,7 +19,7 @@ function($http){
         var match = events.filter(function(event){
             return event._id === id;
         });
-        return match.pop() || {}
+        return match.pop() || {};
     };
 
     eventService.setAll = function(data){

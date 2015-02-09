@@ -51,10 +51,9 @@ describe('eventIndexCtrl', function(){
         });
     });
 
-    it("has $scope.events of all events", function(){
+    it("should have all events under scope", function(){
         eventService.setAll(mockEvents);
-        $scope.events = eventService.getAll();
 
-        expect($scope.events).toEqual(mockEvents);
+        expect(eventService.getAll()).toEqual(mockEvents);
     });
 });
