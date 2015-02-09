@@ -66,7 +66,19 @@ router.route('/:id')
         res.json(req.data);
     })
     .put(function (req, res, next) {
-        res.send('Not Implemented');
+        var deletedUser = {};
+
+        var index = _.findIndex(users, function (user) {
+            return user._id == req.data._id;
+        });
+
+        if (index !== -1) {
+            deletedUser = users.splice(index, 1)[0];
+            users.push(req.body);
+        }
+
+        res.json(req.body);
+
     })
     .delete(function (req, res, next) {
         var deletedUser = {};
