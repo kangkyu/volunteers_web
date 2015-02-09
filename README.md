@@ -22,6 +22,12 @@ Base URL `http://localhost:3000`
 * HTTP Method - `GET`
 * URL Path - `/api/users/:_id`
 
+#### `DELETE /api/users/:_id` ####
+
+* Description - Removes the user with the matching `_id`. Returns the removed user as a JSON object or an empty object if no matching user is found.
+* Method - `DELETE`
+* URL Path - `/api/users/:_id`
+
 ### Events ###
 #### `GET /api/events` ####
 
@@ -38,4 +44,10 @@ Base URL `http://localhost:3000`
 
 * Description - Retrieves the event with the matching `_id` as a JSON object or an empty object if no matching event is found.
 * Method - `GET`
+* URL Path - `/api/events/:_id`
+
+#### `DELETE /api/events/:_id` ####
+
+* Description - Removes the event with the matching `_id`. Returns the removed event as a JSON object or an empty object if no matching event is found.
+* Method - `DELETE`
 * URL Path - `/api/events/:_id`
