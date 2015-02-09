@@ -34,7 +34,7 @@ var events = [
 var uuid = 4;
 
 function getId() {
-    return uuid++;
+    return ++uuid;
 }
 
 function addEvent(event) {

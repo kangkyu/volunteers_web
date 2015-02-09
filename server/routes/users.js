@@ -30,7 +30,7 @@ var users = [
 var uuid = 4;
 
 function getId() {
-    return uuid++;
+    return ++uuid;
 }
 
 function addUser(user) {
