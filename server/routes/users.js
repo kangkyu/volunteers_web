@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var _ = require('lodash-node');
+
 var users = [
     {
         "_id": "1",
@@ -67,7 +69,17 @@ router.route('/:id')
         res.send('Not Implemented');
     })
     .delete(function (req, res, next) {
-        res.send('Not Implemented');
+        var deletedUser = {};
+
+        var index = _.findIndex(users, function (user) {
+            return user._id == req.data._id;
+        });
+
+        if (index !== -1) {
+            deletedUser = users.splice(index, 1)[0];
+        }
+
+        res.json(deletedUser);
     });
 
 

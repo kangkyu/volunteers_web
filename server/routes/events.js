@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var _ = require('lodash-node');
+
 var events = [
     {
         _id: 1,
@@ -54,8 +56,8 @@ router.route('/')
 
 /* /api/events/id. */
 router.param(':id', function (req, res, next, id) {
-    req.data = events.filter(function (user) {
-        return user._id == id;
+    req.data = events.filter(function (event) {
+        return event._id == id;
     })[0] || {};
     next();
 });
@@ -71,7 +73,17 @@ router.route('/:id')
         res.send('Not Implemented');
     })
     .delete(function (req, res, next) {
-        res.send('Not Implemented');
+        var deleteEvent = {};
+
+        var index = _.findIndex(events, function (event) {
+            return event._id == req.data._id;
+        });
+
+        if (index !== -1) {
+            deleteEvent = events.splice(index, 1)[0];
+        }
+
+        res.json(deleteEvent);
     });
 
 
