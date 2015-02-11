@@ -49,9 +49,11 @@ function($http){
         });
     };
 
-    // eventService.updateEvent = function(id, event){
-    //     return $http.put('/api/events/'+ id, event).success();
-    // };
+    eventService.updateEvent = function(id, event){
+        return $http.put('/api/events/'+ id, event).success(function(data){
+            oneEvent = data;
+        });
+    };
 
     return eventService;
 }]);

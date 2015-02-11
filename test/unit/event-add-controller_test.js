@@ -2,7 +2,7 @@
 
 describe('eventAddCtrl', function(){
 
-    var $scope, eventService, $location, $rootScope, $controller;
+    var $scope, eventService, $location, $rootScope, $controller, eventAddCtrl;
     beforeEach(function(){
         module('eventAddCtrlModule');
         module('eventServiceModule');
@@ -32,7 +32,7 @@ describe('eventAddCtrl', function(){
             date: "September 13, 2014",
             time: "6pm"
         };
-        $scope.addButton();
+        // $scope.addButton();
         
         // expect... ?
     });

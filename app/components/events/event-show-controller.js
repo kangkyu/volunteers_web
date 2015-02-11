@@ -10,4 +10,8 @@ function($scope, $routeParams, eventService){
     eventService.loadById($routeParams.eventId).then(function(){
         $scope.event = eventService.getEvent();
     });
+
+    $scope.deleteButton = function(){
+        eventService.deleteEvent($scope.event._id);
+    };
 }]);

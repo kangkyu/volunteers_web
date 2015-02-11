@@ -1,19 +1,19 @@
 <div ng-controller="eventIndexCtrl">
     <div class="page-header">
         <h1>{{events.length}} Event(s)</h1>
-        <div class="text-right">
-            <a class="btn btn-default" ng-href="#/events/new"><i class="fa fa-plus"></i> Add </a>
-        </div>
     </div>
-    <ul ng-repeat="event in events" class="list-unstyled well-lg">
+    <div class="text-right">
+        <a class="btn btn-default" ng-href="#/events/new"><i class="fa fa-plus"></i> New Event </a>
+    </div>
+    <ul ng-repeat="event in events | orderBy:'_id'" class="list-unstyled well-lg">
         <li>title - {{event.title}}</li>
         <li>address - {{event.address}}</li>
         <li>date - {{event.date}}</li>
         <li>time - {{event.time}}</li>
         <li class="text-right">
-            <a class="btn btn-default" ng-href="#/events/{{event._id}}"><i class="fa fa-arrow-right"></i> Details </a>
-            <a class="btn btn-warning" ng-href="#"> Edit </a>
-            <a class="btn btn-danger" ng-click="deleteButton(event)" ng-href="#"> Delete </a>
+            <a class="btn btn-default" ng-href="#/events/{{event._id}}"> Details </a>
+            <a class="btn btn-warning" ng-href="#/events/{{event._id}}/edit"><i class="fa fa-pencil"></i> Edit </a>
+            <a class="btn btn-danger" ng-click="deleteButton(event._id)"> Delete </a>
         </li>
     </ul>
 </div>

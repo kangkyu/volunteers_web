@@ -1,16 +1,18 @@
 <div ng-controller="eventShowCtrl">
-<div class="page-header"><h1>{{event.title}}</h1></div>
+    <div class="page-header">
+        <h1>{{event.title}}</h1>
+    </div>
 
-  <h2>Address</h2>
-  <p>
-    {{event.address}}
-  </p>
-  <h3>Date</h3>
-  <p>
-    {{event.date}}
-  </p>
-  <h3>Time</h3>
-  <p>
-    {{event.time}}
-  </p>
+    <h2>Address</h2>
+    <p>{{event.address}}</p>
+    <h3>Date</h3>
+    <p>{{event.date}}</p>
+    <h3>Time</h3>
+    <p>{{event.time}}</p>
+
+    <div class="text-right">
+        <a class="btn btn-default" ng-href="#/events"> All Events </a>
+        <a class="btn btn-warning" ng-href="#/events/{{event._id}}/edit"><i class="fa fa-pencil"></i> Edit </a>
+        <a class="btn btn-danger" ng-click="deleteButton()" ng-href="#/events"> Delete </a>
+    </div>
 </div>
