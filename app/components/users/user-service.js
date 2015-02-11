@@ -17,7 +17,7 @@ function($http){
 
     userService.getById = function(id){
         var match = users.filter(function(user){
-            return user._id === id;
+            return user._id == id;
         });
         return match.pop() || {};
     };
