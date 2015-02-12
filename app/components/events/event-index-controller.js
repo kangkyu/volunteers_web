@@ -3,16 +3,16 @@ angular
 .controller('eventIndexCtrl', ['$scope', 'eventService', '$location', '$route',
 function($scope, eventService, $location, $route){
 
-    eventService.loadAll().then(function(){
-        $scope.events = eventService.getAll();
+    eventService.loadAll().success(function(data){
+        $scope.events = data;
+        // console.log(data);
     });
 
     $scope.deleteButton = function(eventId){
-        eventService.deleteEvent(eventId).then(function(){
-            $scope.events = eventService.getAll();
+        eventService.deleteEvent(eventId).success(function(data){
+            $scope.events = data;
             $location.path('/events');
         });
         $route.reload();
     };
 }]);
-

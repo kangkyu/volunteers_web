@@ -7,8 +7,8 @@ function($scope, $routeParams, eventService){
     //     $scope.event = eventService.getById($routeParams.eventId);
     // });
 
-    eventService.loadById($routeParams.eventId).then(function(){
-        $scope.event = eventService.getEvent();
+    eventService.loadById($routeParams.eventId).success(function(data){
+        $scope.event = data;
     });
 
     $scope.deleteButton = function(){

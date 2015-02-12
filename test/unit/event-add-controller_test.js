@@ -32,8 +32,8 @@ describe('eventAddCtrl', function(){
             date: "September 13, 2014",
             time: "6pm"
         };
-        // $scope.addButton();
-        
+
+        $scope.addButton();
         // expect... ?
     });
 });

@@ -12,19 +12,11 @@ function($http){
         });
     };
 
-    eventService.getAll = function(){
-        return events;
-    };
-
     eventService.getById = function(id){
         var match = events.filter(function(event){
-            return event._id == id;
+            return parseInt(event._id) === parseInt(id);
         });
         return match.pop() || {};
-    };
-
-    eventService.setAll = function(data){
-        events = data;
     };
 
     eventService.loadById = function(id){
@@ -39,10 +31,6 @@ function($http){
         });
     };
 
-    eventService.getEvent = function(){
-        return oneEvent;
-    };
-
     eventService.deleteEvent = function(id){
         return $http.delete('/api/events/'+ id).success(function(data){
             oneEvent = data;
@@ -53,6 +41,22 @@ function($http){
         return $http.put('/api/events/'+ id, event).success(function(data){
             oneEvent = data;
         });
+    };
+
+    eventService.setAll = function(data){
+        events = data;
+    };
+
+    eventService.getAll = function(){
+        return events;
+    };
+
+    eventService.setEvent = function(data){
+        oneEvent = data;
+    };
+
+    eventService.getEvent = function(){
+        return oneEvent;
     };
 
     return eventService;
