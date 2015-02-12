@@ -33,7 +33,7 @@ describe('eventIndexCtrl', function(){
         }
     ];
 
-    var $scope, $rootScope, eventIndexCtrl, $controller, eventService;
+    var $scope, $rootScope, eventIndexCtrl, $controller, eventService, $route;
     beforeEach(function(){
         module("eventIndexCtrlModule");
         module("eventServiceModule");
@@ -43,17 +43,14 @@ describe('eventIndexCtrl', function(){
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             eventService = $injector.get('eventService');
+            $route = { reload: function(){} };
         });
 
         eventIndexCtrl = $controller('eventIndexCtrl',{
             $scope: $scope,
-            eventService: eventService
+            eventService: eventService,
+            $route: $route
         });
     });
 
-    it("should have all events under scope", function(){
-        eventService.setAll(mockEvents);
-
-        expect(eventService.getAll()).toEqual(mockEvents);
-    });
 });

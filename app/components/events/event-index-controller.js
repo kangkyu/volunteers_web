@@ -5,7 +5,6 @@ function($scope, eventService, $location, $route){
 
     eventService.loadAll().success(function(data){
         $scope.events = data;
-        // console.log(data);
     });
 
     $scope.deleteButton = function(eventId){
