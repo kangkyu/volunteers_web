@@ -11,7 +11,11 @@ function($scope, $routeParams, eventService){
         $scope.event = data;
     });
 
-    $scope.deleteButton = function(){
-        eventService.deleteEvent($scope.event._id);
+    $scope.deleteButton = function(eventId){
+        eventService.deleteEvent(eventId).success(function(){
+            eventService.loadAll().success(function(data){
+                $scope.events = data;
+            });
+        });
     };
 }]);

@@ -13,6 +13,6 @@
     <div class="text-right">
         <a class="btn btn-default" ng-href="#/events"> All Events </a>
         <a class="btn btn-warning" ng-href="#/events/{{event._id}}/edit"><i class="fa fa-pencil"></i> Edit </a>
-        <a class="btn btn-danger" ng-click="deleteButton()" ng-href="#/events"> Delete </a>
+        <a class="btn btn-danger" ng-click="deleteButton(event._id)" ng-href="#/events"> Delete </a>
     </div>
 </div>
