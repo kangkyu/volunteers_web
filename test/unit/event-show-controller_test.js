@@ -1,7 +1,6 @@
 'use strict';
 
-describe('eventIndexCtrl', function(){
-
+describe('eventShowModule', function(){
     var mockEvents = [
         {
             _id: "1",
@@ -33,13 +32,22 @@ describe('eventIndexCtrl', function(){
         }
     ];
 
-    var eventIdDelete = 1, eventsAfterDelete = [
+    var mockEventId = "2";
+    var eventFound = {
+        _id: "2",
+        title: "Super Bowl",
+        address: "Phoenix, Arizona",
+        date: "Feb 1, 2015",
+        time: "2am"
+    };
+
+    var eventsAfterDelete = [
         {
-            _id: "2",
-            title: "Super Bowl",
-            address: "Phoenix, Arizona",
-            date: "Feb 1, 2015",
-            time: "2am"
+            _id: "1",
+            title: "Olympics",
+            address: "Rio De Janeiro, Brazil",
+            date: "Aug 21, 2016",
+            time: "1pm"
         },
         {
             _id: "3",
@@ -57,52 +65,46 @@ describe('eventIndexCtrl', function(){
         }
     ];
 
-    var $scope, $rootScope, eventIndexCtrl, $controller, eventService, $route, $httpBackend;
+    var $scope, $rootScope, $routeParams, $controller, eventShowCtrl, eventService, $httpBackend;
     beforeEach(function(){
-        module("eventIndexCtrlModule");
+        module("eventShowCtrlModule");
         module("eventServiceModule");
 
         inject(function($injector){
-            $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
+            $routeParams = { 'eventId': mockEventId };
+            $controller = $injector.get('$controller');
             eventService = $injector.get('eventService');
-            $route = { reload: function(){} };
-            $httpBackend = $injector.get('$httpBackend')
+            $httpBackend = $injector.get('$httpBackend');
         });
 
-        eventIndexCtrl = $controller('eventIndexCtrl',{
+        eventShowCtrl = $controller('eventShowCtrl', {
             $scope: $scope,
-            eventService: eventService,
-            $route: $route
+            $routeParams: $routeParams,
+            eventService: eventService
         });
     });
 
-    afterEach(function() {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
-
-
-    it("should have all events under scope", function(){
+    it('should find a event object with event id on url', function(){
         // mock data
-        $httpBackend.expectGET('/api/events').respond(mockEvents);
+        $httpBackend.expectGET('/api/events/' + mockEventId).respond(eventFound);
         $httpBackend.flush();
 
         // actual function call
-        
+
         // compare mock data with the result of function
-        expect($scope.events).toEqual(mockEvents);
+        expect($scope.event).toEqual(eventFound);
     });
 
     it("should be able to delete an event by its delete button", function(){
         // mock data
-        $httpBackend.expectGET('/api/events').respond(mockEvents);
-        $httpBackend.expectDELETE('/api/events/' + eventIdDelete).respond(eventsAfterDelete);
+        $httpBackend.expectGET('/api/events/' + mockEventId).respond(eventFound);
+        $httpBackend.expectDELETE('/api/events/' + mockEventId).respond(eventsAfterDelete);
         $httpBackend.expectGET('/api/events').respond(eventsAfterDelete);
 
         // actual function call
-        $scope.deleteButton(eventIdDelete);
+        $scope.deleteButton(mockEventId);
 
         // compare mock data with the result of function
         $httpBackend.flush();

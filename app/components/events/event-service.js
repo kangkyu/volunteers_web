@@ -2,28 +2,27 @@ angular
 .module('eventServiceModule', [])
 .factory('eventService',['$http',
 function($http){
-    eventService = {};
-    events = [];
+    var eventService = {};
+    var urlBase = '/api/events';
 
     eventService.loadAll = function(){
-        return $http.get('/api/events').success(function(data){
-            events = data;
-        });
+        return $http.get(urlBase);
     };
 
-    eventService.getAll = function(){
-        return events;
+    eventService.loadById = function(id){
+        return $http.get(urlBase + '/' + id);
     };
 
-    eventService.getById = function(id){
-        var match = events.filter(function(event){
-            return event._id === id;
-        });
-        return match.pop() || {}
+    eventService.addEvent = function(event){
+        return $http.post(urlBase, event);
     };
 
-    eventService.setAll = function(data){
-        events = data;
+    eventService.deleteEvent = function(id){
+        return $http.delete(urlBase + '/' + id);
+    };
+
+    eventService.updateEvent = function(id, event){
+        return $http.put(urlBase + '/'+ id, event);
     };
 
     return eventService;

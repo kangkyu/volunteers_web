@@ -7,6 +7,8 @@ angular
     'eventIndexCtrlModule',
     'eventServiceModule',
     'eventShowCtrlModule',
+    'eventAddCtrlModule',
+    'eventEditCtrlModule',
 
     'mainCtrlModule'
 ])
@@ -26,6 +28,14 @@ angular
     .when('/events', {
         templateUrl: 'app/components/events/event-index.html',
         controller: 'eventIndexCtrl'
+    })
+    .when('/events/new', {
+        templateUrl: 'app/components/events/event-add.html',
+        controller: 'eventAddCtrl'
+    })
+    .when('/events/:eventId/edit', {
+        templateUrl: 'app/components/events/event-edit.html',
+        controller: 'eventEditCtrl'
     })
     .when('/events/:eventId', {
         templateUrl: 'app/components/events/event-show.html',
