@@ -29,7 +29,7 @@ describe('userIndexCtrl', function(){
         }
     ];
 
-    var $controller, $scope, $rootScope, userIndexCtrl, userService;
+    var $controller, $scope, $rootScope, userIndexCtrl, userService, $httpBackend;
     beforeEach(function(){
         module("userIndexCtrlModule");
         module("userServiceModule");
@@ -39,6 +39,7 @@ describe('userIndexCtrl', function(){
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             userService = $injector.get('userService');
+            $httpBackend = $injector.get('$httpBackend');
         });
 
         userIndexCtrl = $controller('userIndexCtrl',{
@@ -48,8 +49,8 @@ describe('userIndexCtrl', function(){
     });
 
     it('should have an array of all users', function(){
-        userService.setAll(mockUsers);
-
-        expect(userService.getAll()).toEqual(mockUsers);
+        $httpBackend.expectGET('/api/users').respond(mockUsers);
+        $httpBackend.flush();        
+        expect($scope.users).toEqual(mockUsers);
     });
 });
