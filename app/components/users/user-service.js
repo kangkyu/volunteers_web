@@ -12,12 +12,9 @@ function($http){
         return $http.get('/api/users/' + id);
     };
     
-    // userService.getById = function(id){
-    //     var match = users.filter(function(user){
-    //         return parseInt(user._id) === parseInt(id);
-    //     });
-    //     return match.pop() || {};
-    // };
+    userService.addUser = function(user){
+        return $http.post('/api/users', user);
+    }
 
     return userService;
 }]);
