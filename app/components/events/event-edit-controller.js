@@ -7,10 +7,12 @@ function($scope, eventService, $routeParams, $location){
         $scope.event = data;
     });
 
-    $scope.updateButton = function(){
-        eventService.updateEvent($scope.event._id, $scope.event).success(function(data){
-            $scope.events = data;
-            $location.path('/events/'+ $scope.event._id);
+    $scope.updateButton = function(event){
+        eventService.updateEvent(event._id, event).success(function(){
+            eventService.loadAll().success(function(data){
+                $scope.events = data;
+            });
         });
+        $location.path('/events/'+ event._id);
     };
 }]);
