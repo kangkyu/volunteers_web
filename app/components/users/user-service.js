@@ -3,28 +3,18 @@ angular
 .factory('userService', ['$http',
 function($http){
     userService = {};
-    users = [];
 
     userService.loadAll = function(){
-        return $http.get('/api/users').success(function(data){
-            users = data;
-        });
+        return $http.get('/api/users');
     };
 
-    userService.getAll = function(){
-        return users;
+    userService.loadById = function(id){
+        return $http.get('/api/users/' + id);
     };
-
-    userService.getById = function(id){
-        var match = users.filter(function(user){
-            return parseInt(user._id) === parseInt(id);
-        });
-        return match.pop() || {};
-    };
-
-    userService.setAll = function(data){
-        users = data;
-    };
+    
+    userService.addUser = function(user){
+        return $http.post('/api/users', user);
+    }
 
     return userService;
 }]);

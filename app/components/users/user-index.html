@@ -1,5 +1,8 @@
 <div ng-controller="userIndexCtrl">
 <div class="page-header"><h1>{{users.length}} User(s)</h1></div>
+    <div class="text-right">
+        <a class="btn btn-default" ng-href="#/users/new"><i class="fa fa-plus"></i> New User </a>
+    </div>
 
    <ul ng-repeat="user in users" class="list-unstyled well-lg">
         <li>first name - {{user.firstName}}</li>

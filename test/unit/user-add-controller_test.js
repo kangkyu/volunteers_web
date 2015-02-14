@@ -1,8 +1,19 @@
 'use strict';
 
-describe('userIndexCtrl', function(){
+describe('userAddCtrl', function(){
 
-    var mockUsers = [
+    var userAdd = {
+        "firstName": "Nap",
+        "lastName": "Lajoie",
+        "email": "napoleon@example.com"
+    };
+    var userAfterAdd = {
+        "_id": "4",
+        "firstName": "Nap",
+        "lastName": "Lajoie",
+        "email": "napoleon@example.com"
+    };
+    var usersAfterAdd = [
         {
             "_id": "1",
             "firstName": "Randy",
@@ -29,10 +40,10 @@ describe('userIndexCtrl', function(){
         }
     ];
 
-    var $controller, $scope, $rootScope, userIndexCtrl, userService, $httpBackend;
+    var $controller, $rootScope, $scope, $httpBackend, userService, userAddCtrl;
     beforeEach(function(){
-        module("userIndexCtrlModule");
-        module("userServiceModule");
+        module('userAddCtrlModule');
+        module('userServiceModule');
 
         inject(function($injector){
             $controller = $injector.get('$controller');
@@ -42,15 +53,20 @@ describe('userIndexCtrl', function(){
             $httpBackend = $injector.get('$httpBackend');
         });
 
-        userIndexCtrl = $controller('userIndexCtrl',{
-            $scope: $scope,
-            userService: userService
-        });
+        userAddCtrl = $controller('userAddCtrl',
+            {
+                $scope: $scope,
+                userService: userService
+            }
+        );
     });
 
-    it('should have an array of all users', function(){
-        $httpBackend.expectGET('/api/users').respond(mockUsers);
-        $httpBackend.flush();        
-        expect($scope.users).toEqual(mockUsers);
+    it('should add a user', function(){
+        $httpBackend.expectPOST('/api/users', userAdd).respond(userAfterAdd);
+        $httpBackend.expectGET('/api/users').respond(usersAfterAdd);
+
+        $scope.addUser(userAdd);
+        $httpBackend.flush();
+        expect($scope.users).toEqual(usersAfterAdd);
     });
 });
