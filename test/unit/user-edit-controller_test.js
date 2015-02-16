@@ -107,4 +107,17 @@ describe('userEditCtrl', function(){
             expect($scope.user).toEqual(userEdited);
         });
     });
+
+    describe('assignUserToEvent', function(){
+        it("should add an event_id to the user", function(){
+            $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
+            $httpBackend.flush();
+
+            var eventIdToAdd = 1;
+            $scope.assignUserToEvent($scope.user, eventIdToAdd);
+            // console.log($scope.user);
+
+            expect($scope.user.eventId).toEqual(eventIdToAdd);
+        });
+    });
 });

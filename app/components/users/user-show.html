@@ -6,6 +6,7 @@
         <li>first name - {{user.firstName}}</li>
         <li>last name - {{user.lastName}}</li>
         <li>email - {{user.email}}</li>
+        <li ng-if="user.eventId">event - <a href="#/events/{{user.userEvent._id}}">{{user.eventId}} {{user.userEvent.title}}</a></li>
         <li class="text-right">
             <a class="btn btn-info" ng-href="#/users/{{user._id}}/edit"><i class="fa fa-pencil"></i> Edit </a>
             <a class="btn btn-danger" ng-click=""> Delete </a>

@@ -8,6 +8,19 @@ describe('userShowModule', function(){
         lastName: "Lajoie",
         email: "napoleon@example.com",
         eventId: "3"
+    }, eventFound = {
+        _id: "3",
+        title: "Super Bowl",
+        address: "Phoenix, Arizona",
+        date: "Feb 1, 2015",
+        time: "2am"
+    }, userwithEvent = {
+         _id: '4',
+         firstName: 'Nap',
+         lastName: 'Lajoie',
+         email: 'napoleon@example.com',
+         eventId: '3',
+         userEvent: { _id: '3', title: 'Super Bowl', address: 'Phoenix, Arizona', date: 'Feb 1, 2015', time: '2am' }
     };
 
     var $scope, $routeParams, userService, eventService, $rootScope, $controller, userShowCtrl, $httpBackend;
@@ -34,11 +47,20 @@ describe('userShowModule', function(){
         });
     });
 
+    // it('should find a user by userId', function(){
+    //     $httpBackend.expectGET('/api/users/' + mockUserId).respond(userFound);
+    //     $httpBackend.flush();
+
+    //     expect($scope.user).toEqual(userFound);
+    // });
+
+
     it('should find a user by userId', function(){
         $httpBackend.expectGET('/api/users/' + mockUserId).respond(userFound);
+        $httpBackend.expectGET('/api/events/' + userFound.eventId).respond(eventFound);
         $httpBackend.flush();
 
-        expect($scope.user).toEqual(userFound);
+        expect($scope.user).toEqual(userwithEvent);
     });
 
 });
