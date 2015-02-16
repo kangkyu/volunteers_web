@@ -1,0 +1,23 @@
+<div ng-controller="userEditCtrl">
+    <div class="page-header">
+        <h1>Update User</h1>
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="">First Name</label>
+            <input type="text" class="form-control" id="" placeholder="Enter first name" ng-model="user.firstName">
+        </div>
+        <div class="form-group">
+            <label for="">Last Name</label>
+            <input type="text" class="form-control" id="" placeholder="Enter last name" ng-model="user.lastName">
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" class="form-control" id="" placeholder="Enter email" ng-model="user.email">
+        </div>
+        <div>
+            <a class="btn btn-success" ng-click="" ng-href="#/users"> Update </a>
+            <a class="btn btn-default" ng-href="#/users"> Cancel </a>
+        </div>
+    </form>
+</div>

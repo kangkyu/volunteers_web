@@ -71,11 +71,11 @@ describe('eventShowModule', function(){
         module("eventServiceModule");
 
         inject(function($injector){
+            eventService = $injector.get('eventService');
+            $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             $routeParams = { 'eventId': mockEventId };
-            $controller = $injector.get('$controller');
-            eventService = $injector.get('eventService');
             $httpBackend = $injector.get('$httpBackend');
         });
 
@@ -84,6 +84,11 @@ describe('eventShowModule', function(){
             $routeParams: $routeParams,
             eventService: eventService
         });
+    });
+
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
     });
 
     it('should find a event object with event id on url', function(){
