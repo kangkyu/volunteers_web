@@ -63,7 +63,7 @@ describe('eventEditCtrl', function(){
         }
     ];
 
-    var eventService, eventEditCtrl, $scope, $location, $rootScope, $controller, $httpBackend, $routeParams;
+    var eventService, eventEditCtrl, $scope, $rootScope, $controller, $httpBackend, $routeParams;
     beforeEach(function(){
         module('eventEditCtrlModule');
         module('eventServiceModule');
@@ -72,7 +72,6 @@ describe('eventEditCtrl', function(){
             eventService = $injector.get('eventService');
             $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
-            $location = $injector.get('$location');
             $scope = $rootScope.$new();
             $routeParams = {'eventId': editId};
             $httpBackend = $injector.get('$httpBackend');
@@ -82,7 +81,6 @@ describe('eventEditCtrl', function(){
             {
                 $scope: $scope,
                 eventService: eventService,
-                $location: $location,
                 $routeParams: $routeParams
             }
         );
@@ -106,14 +104,13 @@ describe('eventEditCtrl', function(){
             // mock data
             $httpBackend.expectGET('/api/events/' + $routeParams.eventId).respond(eventEdit);
             $httpBackend.whenPUT('/api/events/' + $routeParams.eventId, eventUpdated).respond(eventUpdated);
-            $httpBackend.expectGET('/api/events').respond(eventsAfterEdit);
 
             // actual function call
             $scope.updateButton(eventUpdated);
 
             // compare mock data with the result of function
             $httpBackend.flush();
-            expect($scope.events).toEqual(eventsAfterEdit);
+            expect($scope.event).toEqual(eventUpdated);
         });
     });
 });

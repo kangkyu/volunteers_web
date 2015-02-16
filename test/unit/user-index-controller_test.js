@@ -58,4 +58,43 @@ describe('userIndexCtrl', function(){
         $httpBackend.flush();        
         expect($scope.users).toEqual(mockUsers);
     });
+
+
+    var idDeleting = 3, deletedUser = {
+            "_id": "3",
+            "firstName": "Christy",
+            "lastName": "Mathewson",
+            "email": "christopher@example.com"
+    }, remainingUsers = [
+        {
+            "_id": "1",
+            "firstName": "Randy",
+            "lastName": "Johnson",
+            "email": "randy@example.com"
+        },
+        {
+            "_id": "2",
+            "firstName": "Ty",
+            "lastName": "Cobb",
+            "email": "ty@example.com"
+        },
+        {
+            "_id": "4",
+            "firstName": "Nap",
+            "lastName": "Lajoie",
+            "email": "napoleon@example.com"
+        }
+    ];
+
+
+    describe("deleteUser", function(){
+        it('should delete a user when id matching', function(){
+            $httpBackend.expectGET('/api/users').respond(mockUsers);
+            $httpBackend.expectDELETE('/api/users/'+ idDeleting).respond(remainingUsers);
+            $httpBackend.expectGET('/api/users').respond(remainingUsers);
+            $scope.deleteUser(idDeleting);
+            $httpBackend.flush();
+            expect($scope.users).toEqual(remainingUsers);
+        })
+    });
 });

@@ -11,6 +11,7 @@ angular
     'eventEditCtrlModule',
     'userAddCtrlModule',
     'userEditCtrlModule',
+    'userShowCtrlModule',
 
     'mainCtrlModule'
 ])
@@ -46,6 +47,10 @@ angular
     .when('/events/:eventId/edit', {
         templateUrl: 'app/components/events/event-edit.html',
         controller: 'eventEditCtrl'
+    })
+    .when('/users/:userId', {
+        templateUrl: 'app/components/users/user-show.html',
+        controller: 'userShowCtrl'
     })
     .when('/events/:eventId', {
         templateUrl: 'app/components/events/event-show.html',

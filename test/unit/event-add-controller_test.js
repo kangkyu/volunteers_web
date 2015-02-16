@@ -1,7 +1,15 @@
 'use strict';
 
 describe('eventAddCtrl', function(){
-    var eventAdd = {
+    var eventToAdd = {
+        title: "Moon Festival",
+        address: "Chinatown, Los Angeles, California",
+        date: "September 13, 2014",
+        time: "6pm"
+    };
+
+    var eventAdded = {
+        _id: 3,
         title: "Moon Festival",
         address: "Chinatown, Los Angeles, California",
         date: "September 13, 2014",
@@ -49,7 +57,7 @@ describe('eventAddCtrl', function(){
         }
     ];
 
-    var $scope, eventService, $location, $rootScope, $controller, eventAddCtrl, $httpBackend;
+    var $scope, eventService, $rootScope, $controller, eventAddCtrl, $httpBackend;
     beforeEach(function(){
         module('eventAddCtrlModule');
         module('eventServiceModule');
@@ -59,15 +67,13 @@ describe('eventAddCtrl', function(){
             $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
-            $location = $injector.get('$location');
             $httpBackend = $injector.get('$httpBackend');
         });
 
         eventAddCtrl = $controller('eventAddCtrl',
             {
                 $scope: $scope,
-                eventService: eventService,
-                $location: $location
+                eventService: eventService
             }
         );
     });
@@ -79,14 +85,13 @@ describe('eventAddCtrl', function(){
 
     it("should add an event from the form input", function(){
         // mock data
-        $httpBackend.expectPOST('/api/events', eventAdd).respond(eventsAfterAdd);
-        $httpBackend.expectGET('/api/events').respond(eventsAfterAdd);
+        $httpBackend.expectPOST('/api/events', eventToAdd).respond(eventAdded);
 
         // actual function call
-        $scope.addButton(eventAdd);
+        $scope.addButton(eventToAdd);
 
         // compare mock data with the result of function
         $httpBackend.flush();
-        expect($scope.events).toEqual(eventsAfterAdd);
+        expect($scope.event).toEqual(eventAdded);
     });
 });

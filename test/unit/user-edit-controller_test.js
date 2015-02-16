@@ -34,7 +34,39 @@ describe('userEditCtrl', function(){
         "firstName": "Nap",
         "lastName": "Lajoie",
         "email": "napoleon@example.com"
+    }, userEdited = {
+        "_id": "4",
+        "firstName": "Napoleon",
+        "lastName": "Lajoie",
+        "email": "naplajoie@example.com"
     };
+
+    var usersAfterUpdate = [
+        {
+            "_id": "1",
+            "firstName": "Randy",
+            "lastName": "Johnson",
+            "email": "randy@example.com"
+        },
+        {
+            "_id": "2",
+            "firstName": "Ty",
+            "lastName": "Cobb",
+            "email": "ty@example.com"
+        },
+        {
+            "_id": "3",
+            "firstName": "Christy",
+            "lastName": "Mathewson",
+            "email": "christopher@example.com"
+        },
+        {
+            "_id": "4",
+            "firstName": "Napoleon",
+            "lastName": "Lajoie",
+            "email": "naplajoie@example.com"
+        }
+    ];
 
     var userService, userEditCtrl, $scope, $rootScope, $controller, $httpBackend, $routeParams;
     beforeEach(function(){
@@ -62,5 +94,30 @@ describe('userEditCtrl', function(){
         $httpBackend.flush();
 
         expect($scope.user).toEqual(userEdit);
+    });
+
+    describe('updateUser', function(){
+        it("should update by submit of edited form", function(){
+            $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
+            $httpBackend.expectPUT('/api/users/'+ $routeParams.userId, userEdited).respond(userEdited);
+            // $httpBackend.expectGET('/api/users').respond(usersAfterUpdate);
+
+            $scope.updateUser(userEdited);
+            $httpBackend.flush();
+            expect($scope.user).toEqual(userEdited);
+        });
+    });
+
+    describe('assignUserToEvent', function(){
+        it("should add an event_id to the user", function(){
+            $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
+            $httpBackend.flush();
+
+            var eventIdToAdd = 1;
+            $scope.assignUserToEvent($scope.user, eventIdToAdd);
+            // console.log($scope.user);
+
+            expect($scope.user.eventId).toEqual(eventIdToAdd);
+        });
     });
 });

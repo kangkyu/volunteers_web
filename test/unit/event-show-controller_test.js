@@ -1,6 +1,6 @@
 'use strict';
 
-describe('eventShowModule', function(){
+describe('eventShowCtrlModule', function(){
     var mockEvents = [
         {
             _id: "1",

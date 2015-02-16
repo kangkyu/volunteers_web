@@ -20,5 +20,9 @@ function($http){
         return $http.put('/api/users' + '/' + id, user);
     };
 
+    userService.deleteUser = function(id){
+        return $http.delete('/api/users' + '/' + id);
+    };
+
     return userService;
 }]);
