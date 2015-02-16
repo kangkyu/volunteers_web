@@ -8,10 +8,8 @@ function($scope, $routeParams, userService){
     });
 
     $scope.updateUser = function(user){
-        userService.updateUser(user._id, user).success(function(){
-            userService.loadAll().success(function(data){
-                $scope.users = data;
-            });
+        userService.updateUser(user._id, user).success(function(data){
+            $scope.user = data;
         });
     };
 }]);

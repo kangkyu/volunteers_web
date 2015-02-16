@@ -21,7 +21,7 @@
             <input type="text" class="form-control" id="" placeholder="Enter time" ng-model="event.time">
         </div>
         <div>
-            <a class="btn btn-success" ng-click="addButton(event)">Add</a>
+            <a class="btn btn-success" ng-click="addButton(event)" ng-href="#/events/{{event._id}}"> Add </a>
             <a class="btn btn-default" ng-href="#/events"> Cancel </a>
         </div>
     </form>

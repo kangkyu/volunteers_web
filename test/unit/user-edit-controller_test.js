@@ -100,11 +100,11 @@ describe('userEditCtrl', function(){
         it("should update by submit of edited form", function(){
             $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
             $httpBackend.expectPUT('/api/users/'+ $routeParams.userId, userEdited).respond(userEdited);
-            $httpBackend.expectGET('/api/users').respond(usersAfterUpdate);
+            // $httpBackend.expectGET('/api/users').respond(usersAfterUpdate);
 
             $scope.updateUser(userEdited);
             $httpBackend.flush();
-            expect($scope.users).toEqual(usersAfterUpdate);
+            expect($scope.user).toEqual(userEdited);
         });
     });
 });
