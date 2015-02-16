@@ -7,4 +7,11 @@ function($scope, $routeParams, userService){
         $scope.user = data;
     });
 
+    $scope.updateUser = function(user){
+        userService.updateUser(user._id, user).success(function(){
+            userService.loadAll().success(function(data){
+                $scope.users = data;
+            });
+        });
+    };
 }]);

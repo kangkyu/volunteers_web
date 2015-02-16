@@ -12,5 +12,10 @@
         <li>first name - {{user.firstName}}</li>
         <li>last name - {{user.lastName}}</li>
         <li>email - {{user.email}}</li>
+        <li class="text-right">
+            <!-- <a class="btn btn-default" ng-href="#/users/{{user._id}}"> Details </a> -->
+            <a class="btn btn-info" ng-href="#/users/{{user._id}}/edit"><i class="fa fa-pencil"></i> Edit </a>
+            <a class="btn btn-danger" ng-click=""> Delete </a>
+        </li>
     </ul>
 </div>
