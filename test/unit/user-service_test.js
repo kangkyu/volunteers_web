@@ -213,4 +213,74 @@ describe('userService', function(){
         });
     });
 
+    var idDeleting = 3, deletedUser = {
+            "_id": "3",
+            "firstName": "Christy",
+            "lastName": "Mathewson",
+            "email": "christopher@example.com"
+    }, remainingUsers = [
+        {
+            "_id": "1",
+            "firstName": "Randy",
+            "lastName": "Johnson",
+            "email": "randy@example.com"
+        },
+        {
+            "_id": "2",
+            "firstName": "Ty",
+            "lastName": "Cobb",
+            "email": "ty@example.com"
+        },
+        {
+            "_id": "4",
+            "firstName": "Nap",
+            "lastName": "Lajoie",
+            "email": "napoleon@example.com"
+        }
+    ];
+
+    describe('deleteUser', function(){
+        it('should delete a user if id matching', function(){
+            $httpBackend.expectDELETE('/api/users/' + idDeleting).respond(deletedUser);
+            var resultUser;
+            userService.deleteUser(idDeleting).success(function(data){
+                resultUser = data;
+            });
+            $httpBackend.flush();
+            expect(resultUser).toEqual(deletedUser);
+        });
+        it('should be removed from user list if id matching', function(){
+            $httpBackend.expectDELETE('/api/users/' + idDeleting).respond(deletedUser);
+            userService.deleteUser(idDeleting);
+            $httpBackend.expectGET('/api/users').respond(remainingUsers);
+            var resultUsers;
+            userService.loadAll().success(function(data){
+                resultUsers = data;
+            });
+            $httpBackend.flush();
+            expect(resultUsers).toEqual(remainingUsers);
+        });
+
+        it('should return empty object if nothing matches', function(){
+            $httpBackend.expectDELETE('/api/users/'+ 'nomatch').respond({});
+            var result;
+            userService.deleteUser('nomatch').success(function(data){
+                result = data;
+            });
+            $httpBackend.flush();
+            expect(result).toEqual({});
+        });
+        it('should not make any changes on user list if nothing matches', function(){
+            $httpBackend.expectDELETE('/api/users/' + "nomatch").respond({});
+            userService.deleteUser("nomatch");
+            $httpBackend.expectGET('/api/users').respond(mockUsers);
+            var resultUsers;
+            userService.loadAll().success(function(data){
+                resultUsers = data;
+            });
+            $httpBackend.flush();
+            expect(resultUsers).toEqual(mockUsers);
+        });
+
+    });
 });

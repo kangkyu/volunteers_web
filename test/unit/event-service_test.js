@@ -243,9 +243,11 @@ describe('eventService', function(){
 
     describe('deleteEvent', function(){
         it("should delete a matching event with the id given", function(){
-            $httpBackend.expectDELETE('/api/events/' + idToDelete).respond(deletedEvents);
+            $httpBackend.expectDELETE('/api/events/' + idToDelete).respond(eventDeleted);
+            eventService.deleteEvent(idToDelete)
+            $httpBackend.expectGET("/api/events").respond(deletedEvents);
             var resultEvents;
-            eventService.deleteEvent(idToDelete).success(function(data){
+            eventService.loadAll().success(function(data){
                 resultEvents = data;
             });
             $httpBackend.flush();
