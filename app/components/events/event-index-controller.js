@@ -14,4 +14,6 @@ function($scope, eventService){
             });
         });
     };
+
+    $scope.predicate = '_id'
 }]);
