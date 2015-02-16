@@ -13,8 +13,5 @@ function($scope, eventService){
                 $scope.events = data;
             });
         });
-        // $location.path('/events');
-        // $route.reload();
     };
-
 }]);

@@ -61,12 +61,17 @@ describe('userAddCtrl', function(){
         );
     });
 
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
     it('should add a user', function(){
         $httpBackend.expectPOST('/api/users', userAdd).respond(userAfterAdd);
-        $httpBackend.expectGET('/api/users').respond(usersAfterAdd);
+        // $httpBackend.expectGET('/api/users').respond(usersAfterAdd);
 
         $scope.addUser(userAdd);
         $httpBackend.flush();
-        expect($scope.users).toEqual(usersAfterAdd);
+        expect($scope.user).toEqual(userAfterAdd);
     });
 });

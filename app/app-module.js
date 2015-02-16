@@ -10,6 +10,7 @@ angular
     'eventAddCtrlModule',
     'eventEditCtrlModule',
     'userAddCtrlModule',
+    'userEditCtrlModule',
 
     'mainCtrlModule'
 ])
@@ -26,17 +27,21 @@ angular
         templateUrl: 'app/components/users/user-index.html',
         controller: 'userIndexCtrl'
     })
-    .when('/users/new', {
-        templateUrl: 'app/components/users/user-add.html',
-        controller: 'userAddCtrl'
-    })
     .when('/events', {
         templateUrl: 'app/components/events/event-index.html',
         controller: 'eventIndexCtrl'
     })
+    .when('/users/new', {
+        templateUrl: 'app/components/users/user-add.html',
+        controller: 'userAddCtrl'
+    })
     .when('/events/new', {
         templateUrl: 'app/components/events/event-add.html',
         controller: 'eventAddCtrl'
+    })
+    .when('/users/:userId/edit', {
+        templateUrl: 'app/components/users/user-edit.html',
+        controller: 'userEditCtrl'
     })
     .when('/events/:eventId/edit', {
         templateUrl: 'app/components/events/event-edit.html',

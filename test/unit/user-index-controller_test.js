@@ -48,6 +48,11 @@ describe('userIndexCtrl', function(){
         });
     });
 
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
     it('should have an array of all users', function(){
         $httpBackend.expectGET('/api/users').respond(mockUsers);
         $httpBackend.flush();        
