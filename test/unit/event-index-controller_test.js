@@ -57,24 +57,22 @@ describe('eventIndexCtrl', function(){
         }
     ];
 
-    var $scope, $rootScope, eventIndexCtrl, $controller, eventService, $route, $httpBackend;
+    var $scope, $rootScope, eventIndexCtrl, $controller, eventService, $httpBackend;
     beforeEach(function(){
         module("eventIndexCtrlModule");
         module("eventServiceModule");
 
         inject(function($injector){
+            eventService = $injector.get('eventService');
             $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
-            eventService = $injector.get('eventService');
-            $route = { reload: function(){} };
-            $httpBackend = $injector.get('$httpBackend')
+            $httpBackend = $injector.get('$httpBackend');
         });
 
         eventIndexCtrl = $controller('eventIndexCtrl',{
             $scope: $scope,
             eventService: eventService,
-            $route: $route
         });
     });
 
@@ -82,7 +80,6 @@ describe('eventIndexCtrl', function(){
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
-
 
     it("should have all events under scope", function(){
         // mock data

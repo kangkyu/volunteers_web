@@ -55,11 +55,11 @@ describe('eventAddCtrl', function(){
         module('eventServiceModule');
 
         inject(function($injector){
+            eventService = $injector.get('eventService');
             $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
-            $location = $injector.get('$location');
-            eventService = $injector.get('eventService');
             $scope = $rootScope.$new();
+            $location = $injector.get('$location');
             $httpBackend = $injector.get('$httpBackend');
         });
 
@@ -70,6 +70,11 @@ describe('eventAddCtrl', function(){
                 $location: $location
             }
         );
+    });
+
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
     });
 
     it("should add an event from the form input", function(){

@@ -78,6 +78,13 @@ describe('eventService', function(){
         date: "Sep 13, 2014",
         time: "8pm"
     };
+    var newEventAdded = {
+        _id: 5,
+        title: "Chinatown Moon Festival",
+        address: "Los Angeles, California",
+        date: "Sep 13, 2014",
+        time: "8pm"
+    }
     var addedEvents = [
         {
             _id: "1",
@@ -210,9 +217,13 @@ describe('eventService', function(){
 
     describe('addEvent', function(){
         it("should add an event to the event list", function(){
-            $httpBackend.expectPOST('/api/events', newEvent).respond(addedEvents);
+            $httpBackend.expectPOST('/api/events', newEvent).respond(newEventAdded);
+            $httpBackend.expectGET('/api/events').respond(addedEvents);
+
+            eventService.addEvent(newEvent);
+
             var resultEvents;
-            eventService.addEvent(newEvent).success(function(data){
+            eventService.loadAll().success(function(data){
                 resultEvents = data;
             });
             $httpBackend.flush();
@@ -220,13 +231,13 @@ describe('eventService', function(){
         });
 
         it("should return the added event", function(){
-            $httpBackend.expectPOST('/api/events', newEvent).respond(newEvent);
+            $httpBackend.expectPOST('/api/events', newEvent).respond(newEventAdded);
             var resultEvent;
             eventService.addEvent(newEvent).success(function(data){
                 resultEvent = data;
             });
             $httpBackend.flush();
-            expect(resultEvent).toEqual(newEvent);
+            expect(resultEvent).toEqual(newEventAdded);
         });
     });
 
@@ -253,12 +264,10 @@ describe('eventService', function(){
 
         it("should get empty object when id doesn't match to any event", function(){
             $httpBackend.expectDELETE('/api/events/' + "nomatch").respond({});
-
             var resultEvent;
             eventService.deleteEvent("nomatch").success(function(data){
                 resultEvent = data;
             });
-
             $httpBackend.flush();
             expect(resultEvent).toEqual({});
         });
@@ -266,9 +275,12 @@ describe('eventService', function(){
 
     describe('updateEvent', function(){
         it("should update the event with id into edited input", function(){
-            $httpBackend.expectPUT('/api/events/' + idEdited, eventEdited).respond(updatedEvents);
+            $httpBackend.expectPUT('/api/events/' + idEdited, eventEdited).respond(eventEdited);
+            $httpBackend.expectGET('/api/events').respond(updatedEvents);
+            eventService.updateEvent(idEdited, eventEdited);
+
             var resultEvents;
-            eventService.updateEvent(idEdited, eventEdited).success(function(data){
+            eventService.loadAll().success(function(data){
                 resultEvents = data;
             });
             $httpBackend.flush();
@@ -284,19 +296,6 @@ describe('eventService', function(){
             $httpBackend.flush();
             expect(resultEvent).toEqual(eventEdited);
         });
-
-        it("should get empty object when id doesn't match to any event", function(){
-            $httpBackend.expectPUT('/api/events/' + "nomatch", eventEdited).respond({});
-
-            var resultEvent;
-            eventService.updateEvent("nomatch", eventEdited).success(function(data){
-                resultEvent = data;
-            });
-
-            $httpBackend.flush();
-            expect(resultEvent).toEqual({});
-        });
     });
-
 });
 

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('userIndexCtrl', function(){
+describe('userEditCtrl', function(){
 
     var mockUsers = [
         {
@@ -29,33 +29,38 @@ describe('userIndexCtrl', function(){
         }
     ];
 
-    var $controller, $scope, $rootScope, userIndexCtrl, userService, $httpBackend;
+    var editUserId = 4, userEdit = {
+        "_id": "4",
+        "firstName": "Nap",
+        "lastName": "Lajoie",
+        "email": "napoleon@example.com"
+    };
+
+    var userService, userEditCtrl, $scope, $rootScope, $controller, $httpBackend, $routeParams;
     beforeEach(function(){
-        module("userIndexCtrlModule");
-        module("userServiceModule");
+        module('userEditCtrlModule');
+        module('userServiceModule');
 
         inject(function($injector){
+            userService = $injector.get('userService');
             $controller = $injector.get('$controller');
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
-            userService = $injector.get('userService');
+            $routeParams = {'userId': editUserId};
             $httpBackend = $injector.get('$httpBackend');
         });
 
-        userIndexCtrl = $controller('userIndexCtrl',{
+        userEditCtrl = $controller('userEditCtrl', {
             $scope: $scope,
-            userService: userService
+            userService: userService,
+            $routeParams: $routeParams
         });
     });
 
-    afterEach(function() {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
-    });
+    it('should show pre-filled form to edit', function(){
+        $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
+        $httpBackend.flush();
 
-    it('should have an array of all users', function(){
-        $httpBackend.expectGET('/api/users').respond(mockUsers);
-        $httpBackend.flush();        
-        expect($scope.users).toEqual(mockUsers);
+        expect($scope.user).toEqual(userEdit);
     });
 });
