@@ -12,13 +12,4 @@ function($scope, $routeParams, userService){
             $scope.user = data;
         });
     };
-
-    $scope.assignUserToEvent = function(user, id){
-        // console.log(id);
-        // console.log(user);
-        user.eventId = id;
-        userService.updateUser(user._id, user).success(function(data){
-            $scope.user = data;
-        });
-    };
 }]);
