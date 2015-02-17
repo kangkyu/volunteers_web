@@ -100,24 +100,10 @@ describe('userEditCtrl', function(){
         it("should update by submit of edited form", function(){
             $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
             $httpBackend.expectPUT('/api/users/'+ $routeParams.userId, userEdited).respond(userEdited);
-            // $httpBackend.expectGET('/api/users').respond(usersAfterUpdate);
 
             $scope.updateUser(userEdited);
             $httpBackend.flush();
             expect($scope.user).toEqual(userEdited);
-        });
-    });
-
-    describe('assignUserToEvent', function(){
-        it("should add an event_id to the user", function(){
-            $httpBackend.expectGET('/api/users/'+ $routeParams.userId).respond(userEdit);
-            $httpBackend.flush();
-
-            var eventIdToAdd = 1;
-            $scope.assignUserToEvent($scope.user, eventIdToAdd);
-            // console.log($scope.user);
-
-            expect($scope.user.eventId).toEqual(eventIdToAdd);
         });
     });
 });
